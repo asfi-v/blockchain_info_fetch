@@ -1,0 +1,38 @@
+<html>
+<head>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<script>
+
+function getBlockchainInfo() {
+
+    blockNumber = document.getElementById("blocknumber").value
+	$.get('https://api.blockcypher.com/v1/btc/main/blocks/'+blockNumber)
+	.then(function(d)
+		{
+			for(key in d){
+				newElement = document.createElement("p");
+				newElement.innerHTML = key + ":" + d[key];
+				mainParagraph = document.getElementById("data");
+				mainParagraph.appendChild(newElement);
+			}
+		}
+	);
+
+}
+</script>
+<a href="index.html" class="button" >Block Info</a> <a href="transactionInfo.html"
+class="button" >Transaction Info</a>
+<div class="container">
+<h1>Fetching Bitcoin Data</h1>
+<input id="blocknumber" type="text"></input>
+
+<p id="data"></p>
+<button onclick = "getBlockchainInfo()">Check Blockchain Info</button>
+</div>
+</body>
+</html>
